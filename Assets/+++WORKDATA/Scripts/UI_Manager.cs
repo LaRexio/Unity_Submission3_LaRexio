@@ -22,8 +22,9 @@ public class UI_Manager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI textCoinCount;
     
     
-    private void Start() 
+    private void Start()
     {
+        Time.timeScale = 0;
         mainMenu.SetActive(true);
         conditionsMenu.SetActive(false);
         settingsMenu.SetActive(false);
@@ -49,6 +50,7 @@ public class UI_Manager : MonoBehaviour
     public void CloseMainMenu()
     {
         mainMenu.SetActive(false);
+        Time.timeScale = 1;
     }
     
 
