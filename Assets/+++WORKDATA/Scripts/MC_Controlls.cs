@@ -1,6 +1,6 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.Rendering.Universal;
+
 
 public class MC_Controlls : MonoBehaviour
 {
@@ -9,85 +9,99 @@ public class MC_Controlls : MonoBehaviour
     [SerializeField] private float speed = 2f; // how much speed the MC got
     [SerializeField] private float jumpForce = 10f;
 
-    private Rigidbody rb;
+    public Rigidbody2D rb;
 
-    #region GroundCheck
+    [Header("The Groundcheck")] [SerializeField]
+    private LayerMask groundLayer;
 
-    [SerializeField] private LayerMask groundLayer;
     [SerializeField] private Transform transformgroundCheck;
 
-    #endregion
 
-    [SerializeField] private UI_Manager ManagerUI; // to use the ui manager in this script
-    [SerializeField] private Coin_Manager ManagerCoin;
-    private bool playerCanMove = true; // Player can move the MC
+    [Header("The Manager")] 
+    [SerializeField] private UI_Manager managerUI; // to use the ui manager in this script
+
+    [SerializeField] private CoinManager managerCoin;
+
+    private bool canMove = true; 
 
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        playerCanMove = true;
+
+        canMove = true;
     }
 
     void Update()
     {
         #region movement
 
-        Debug.Log(rb.linearVelocity);
-
-        direction = 0;
-
-
-        if (Keyboard.current.aKey.isPressed)
+        if (canMove)
         {
-            direction = -1;
+            Debug.Log(rb.linearVelocity);
+
+            direction = 0;
+
+
+            if (Keyboard.current.aKey.isPressed)
+            {
+                direction = -1;
+            }
+
+
+            if (Keyboard.current.dKey.isPressed)
+            {
+                direction = 1;
+            }
+
+            if (Keyboard.current.spaceKey.wasPressedThisFrame)
+            {
+                Jump();
+            }
+
+
+
+            rb.linearVelocity = new Vector2(direction * speed, rb.linearVelocity.y);
         }
 
-
-        if (Keyboard.current.dKey.isPressed)
-        {
-            direction = 1;
-        }
-
-        if (Keyboard.current.spaceKey.wasPressedThisFrame) 
-        { Jump();}
-
-        
-        rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce);
-        
         #endregion
     }
 
-    void Jump()
+    public void Jump()
     {
-        if (Physics2D.OverlapCircle(transformgroundCheck.position, 0.2f, groundLayer))
+        if (canMove)
+        {
+            if (Physics2D.OverlapCircle(transformgroundCheck.position, 0.2f, groundLayer))
+            {
+                rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce);
+            }
+
+        }
+    }
+
+
+
+
+
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+
+        Debug.Log("We entered a Trigger" + other.name);
+
+        if (other.CompareTag("Coin"))
+        {
+            managerCoin.AddCoin();
+            Destroy(other.gameObject);
+        }
+
+        else if (other.CompareTag("Obstacle"))
+        {
+            //Stop Movement && Show Lost panel
+
+            managerUI.Showlose();
+            canMove = false;
+
+
+        }
     }
 }
-
-
-
-
-
-
-/*
-            private void OnTriggerEnter2D(Collider2D other)
-            {
-            
-                Debug.Log("We entered a Trigger" + other.name);
-
-                if (other.CompareTag("coin"))
-                {
-                    Coin_Manager.AddCoin();
-                    Destroy(other.gameObject);
-                }
-
-                else if (other.CompareTag("obstacle"))
-                {
-                    //Stop Movement && Show Lost panel
-
-                    UI_Manager.Showlose();
-                    playerCanMove = false;
-
-                
-                }
-            }
-*/

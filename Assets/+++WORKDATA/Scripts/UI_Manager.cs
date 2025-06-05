@@ -11,12 +11,13 @@ public class UI_Manager : MonoBehaviour
     [SerializeField] private GameObject winMenu;
     [SerializeField] private GameObject loseMenu;
 
-    [SerializeField] private Button StartgameB;
-    [SerializeField] private Button ContinuegameB;
-    [SerializeField] private Button RetrygameB;
-    [SerializeField] private Button SettingsB;
-    [SerializeField] private Button BackBinSettings;
-    [SerializeField] private Button BackBinWinPanel;
+    [SerializeField] private Button startgameB;
+    [SerializeField] private Button continuegameB;
+    [SerializeField] private Button retrygameB;
+    [SerializeField] private Button settingsB;
+    [SerializeField] private Button backBinSettings;
+    [SerializeField] private Button backBinWinPanel;
+    
 
     [SerializeField] private TextMeshProUGUI textCoinCount;
     
@@ -29,25 +30,27 @@ public class UI_Manager : MonoBehaviour
         winMenu.SetActive(false);
         loseMenu.SetActive(false);
         
-        StartgameB.onClick.AddListener(CloseMainMenu);
-        ContinuegameB.onClick.AddListener(ConditionsMenu);
-        SettingsB.onClick.AddListener(SettingsMenu);
-        BackBinSettings.onClick.AddListener(CloseSettingsMenu);
-        BackBinWinPanel.onClick.AddListener(BacktoMM);
+        startgameB.onClick.AddListener(CloseMainMenu);
+        continuegameB.onClick.AddListener(ConditionsMenu);
+        settingsB.onClick.AddListener(SettingsMenu);
+        backBinSettings.onClick.AddListener(CloseSettingsMenu);
+        backBinWinPanel.onClick.AddListener(BacktoMM);
+        retrygameB.onClick.AddListener(RetryGame);
 
     }
 
     #region Panels
 
+    void RetryGame()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
+
     public void CloseMainMenu()
     {
         mainMenu.SetActive(false);
     }
-
-    void RestartGame()
-    {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-    }
+    
 
     void SettingsMenu()
     {
