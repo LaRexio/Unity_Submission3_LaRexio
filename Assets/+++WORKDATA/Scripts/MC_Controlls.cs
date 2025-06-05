@@ -68,14 +68,15 @@ public class MC_Controlls : MonoBehaviour
 
     public void Jump()
     {
+
         if (canMove)
         {
             if (Physics2D.OverlapCircle(transformgroundCheck.position, 0.2f, groundLayer))
             {
                 rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce);
             }
-
         }
+
     }
 
 
