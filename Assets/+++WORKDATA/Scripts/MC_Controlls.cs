@@ -22,46 +22,47 @@ public class MC_Controlls : MonoBehaviour
 
     [SerializeField] private CoinManager managerCoin;
 
-    private bool canMove = true; 
+    public bool canMove = true; 
 
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
 
-        canMove = true;
+        canMove = false;
     }
 
     void Update()
     {
         #region movement
 
-        if (canMove)
-        {
+        //if (canMove) {
+            
             Debug.Log(rb.linearVelocity);
 
             direction = 0;
 
 
-            if (Keyboard.current.aKey.isPressed)
+            if (Keyboard.current.aKey.isPressed && canMove == true)
             {
                 direction = -1;
             }
 
 
-            if (Keyboard.current.dKey.isPressed)
+            if (Keyboard.current.dKey.isPressed && canMove == true)
             {
                 direction = 1;
             }
 
-            if (Keyboard.current.spaceKey.wasPressedThisFrame)
+            if (Keyboard.current.spaceKey.wasPressedThisFrame && canMove == true)
             {
                 Jump();
             }
-
+        
 
 
             rb.linearVelocity = new Vector2(direction * speed, rb.linearVelocity.y);
-        }
+        //}
+        
 
         #endregion
     }
@@ -69,7 +70,7 @@ public class MC_Controlls : MonoBehaviour
     public void Jump()
     {
 
-        if (canMove)
+        if (canMove = true)
         {
             if (Physics2D.OverlapCircle(transformgroundCheck.position, 0.2f, groundLayer))
             {

@@ -37,6 +37,7 @@ public class UI_Manager : MonoBehaviour
         backBinSettings.onClick.AddListener(CloseSettingsMenu);
         backBinWinPanel.onClick.AddListener(BacktoMM);
         retrygameB.onClick.AddListener(RetryGame);
+        backBinWinPanel.onClick.AddListener(BacktoMM);
 
     }
 
@@ -73,6 +74,11 @@ public class UI_Manager : MonoBehaviour
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1);
     }
+
+    void winningMenu()
+    {
+        
+    }
     public void UpdateTextCoinCount(int newCount)
     {
         textCoinCount.text = newCount.ToString();
@@ -82,7 +88,8 @@ public class UI_Manager : MonoBehaviour
     public void Showlose()
     {
         loseMenu.SetActive(true);
-       
+        var canMove = false;
+
     }
 
     #endregion
