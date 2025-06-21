@@ -28,7 +28,7 @@ public class MC_Controlls : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
 
-        canMove = false;
+        canMove = true;
     }
 
     void Update()

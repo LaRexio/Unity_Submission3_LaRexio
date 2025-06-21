@@ -20,8 +20,9 @@ public class TimerScript : MonoBehaviour
    IEnumerator CountdowntoStart()
    {
        
-       while (countdownTime > 0)
+       while (countdownTime > 0) 
        {
+           
            countdownText.text = countdownTime.ToString();
            
            yield return new WaitForSeconds(1f);

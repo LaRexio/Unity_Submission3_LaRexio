@@ -27,6 +27,7 @@ public class UI_Manager : MonoBehaviour
         Time.timeScale = 0;
         mainMenu.SetActive(true);
         conditionsMenu.SetActive(false);
+
         settingsMenu.SetActive(false);
         winMenu.SetActive(false);
         loseMenu.SetActive(false);
