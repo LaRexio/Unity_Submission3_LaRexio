@@ -75,11 +75,14 @@ public class UI_Manager : MonoBehaviour
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1);
     }
+    
 
-    void winningMenu()
+     public void winningMenu()
     {
-        
+        winMenu.SetActive(true);
     }
+
+    
     public void UpdateTextCoinCount(int newCount)
     {
         textCoinCount.text = newCount.ToString();

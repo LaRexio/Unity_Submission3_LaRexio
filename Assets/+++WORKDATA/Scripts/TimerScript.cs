@@ -2,7 +2,6 @@ using System;
 using System.Collections;
 using UnityEngine;
 using TMPro;
-using UnityEngine.InputSystem.iOS;
 using UnityEngine.UI;
 
 public class TimerScript : MonoBehaviour
